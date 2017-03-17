@@ -11,7 +11,7 @@ class Fund(models.Model):
     _name = 'cowin.fund'
     _order = 'name'
 
-    name = fields.Char(required=True, string=u"基金编号")
+    name = fields.Char(string=u"基金编号")
     full_name = fields.Char(string=u"基金全称")
     company_id = fields.Many2one('res.partner', string=u"管理公司")
     capital = fields.Float(string=u'预注册资本')
@@ -25,3 +25,11 @@ class Fund(models.Model):
         ("draft", "Draft"),
         ("done", "Done")
     ], string=u"所处阶段")
+
+    @api.model
+    def create(self,vals):
+        if not vals.get('name'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('cowin.fund') or '/'
+            print vals['name']
+        return super(Fund, self).create(vals)
+

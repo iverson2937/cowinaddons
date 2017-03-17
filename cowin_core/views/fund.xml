@@ -1,59 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="cowin_core.list">
-      <field name="name">cowin_core list</field>
-      <field name="model">cowin_core.cowin_core</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
-    -->
+    <data>
+        <record model="ir.ui.view" id="all_fund_form_view">
+            <field name="name">Fund</field>
+            <field name="model">cowin.fund</field>
+            <field name="arch" type="xml">
+                <form string="Fund Form">
+                    <sheet>
+                        <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="fund_type" string="基金类型"/>
+                                    <field name="apply_date"/>
+                                    <field name="capital"/>
+                                </group>
+                                <group>
+                                    <field name="company_id"/>
+                                    <field name="state"/>
+                                    <field name="full_name"/>
+                                    <field name="partner_id"/>
+                                </group>
+                        </group>
 
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="cowin_core.action_window">
-      <field name="name">cowin_core window</field>
-      <field name="res_model">cowin_core.cowin_core</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-    -->
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="cowin_core.action_server">
-      <field name="name">cowin_core server</field>
-      <field name="model_id" ref="model_cowin_core_cowin_core"/>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
-    </record>
-    -->
+        <record model="ir.ui.view" id="all_fund_tree_view">
+            <field name="name">Fund</field>
+            <field name="model">cowin.fund</field>
+            <field name="arch" type="xml">
+                <tree string="Fund Tree">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="full_name"/>
+                    <field name="company_id"/>
+                    <field name="capital"/>
+                    <field name="partner_id"/>
+                    <field name="fund_type" string="基金类型"/>
+                    <field name="apply_date"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="archived_fund_tree_view">
+            <field name="name">Fund</field>
+            <field name="model">cowin.fund</field>
+            <field name="arch" type="xml">
+                <tree string="Fund Tree">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="full_name"/>
+                    <field name="company_id"/>
+                    <field name="capital"/>
+                    <field name="partner_id"/>
 
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="cowin_core" id="cowin_core.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="cowin_core.menu_1" parent="cowin_core.menu_root"/>
-    <menuitem name="Menu 2" id="cowin_core.menu_2" parent="cowin_core.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="cowin_core.menu_1_list" parent="cowin_core.menu_1"
-              action="cowin_core.action_window"/>
-    <menuitem name="Server to list" id="cowin_core" parent="cowin_core.menu_2"
-              action="cowin_core.action_server"/>
-    -->
-  </data>
+                    <field name="fund_type" string="基金类型"/>
+                    <field name="apply_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="fund_search_view">
+            <field name="name">fund.search</field>
+            <field name="model">cowin.fund</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="company_id"/>
+                    <field name="partner_id"/>
+                    <field name="full_name"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="all_fund_list_action">
+            <field name="name">所有基金</field>
+            <field name="res_model">cowin.fund</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p>Create the first fund
+                </p>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="archived_fund_list_action">
+            <field name="name">归档基金</field>
+            <field name="res_model">cowin.fund</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','done')]</field>
+            <field name="help" type="html">
+                <p>Create the first fund
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="main_fund_root" name="基金管理"/>
+        <menuitem id="fund_menu" name="基金管理"
+                  parent="main_fund_root"/>
+        <menuitem id="all_fund_menu" name="所有基金" parent="fund_menu"
+                  action="all_fund_list_action"/>
+        <menuitem id="archived_fund_menu" name="归档基金" parent="fund_menu"
+                  action="archived_fund_list_action"/>
+
+    </data>
 </odoo>

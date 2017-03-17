@@ -1,22 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <!-- <template id="listing"> -->
-        <!--   <ul> -->
-        <!--     <li t-foreach="objects" t-as="object"> -->
-        <!--       <a t-attf-href="#{ root }/objects/#{ object.id }"> -->
-        <!--         <t t-esc="object.display_name"/> -->
-        <!--       </a> -->
-        <!--     </li> -->
-        <!--   </ul> -->
-        <!-- </template> -->
-        <!-- <template id="object"> -->
-        <!--   <h1><t t-esc="object.display_name"/></h1> -->
-        <!--   <dl> -->
-        <!--     <t t-foreach="object._fields" t-as="field"> -->
-        <!--       <dt><t t-esc="field"/></dt> -->
-        <!--       <dd><t t-esc="object[field]"/></dd> -->
-        <!--     </t> -->
-        <!--   </dl> -->
-        <!-- </template> -->
+        <record model="ir.ui.view" id="all_project_form_view">
+            <field name="name">Project</field>
+            <field name="model">cowin.project</field>
+            <field name="arch" type="xml">
+                <form string="Project Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="fund_type"/>
+                                <field name="apply_date"/>
+                                <field string="电话" name="phone"/>
+                                <field name="email"/>
+                            </group>
+                            <group>
+                                <field name="company_id"/>
+                                <field name="state"/>
+                                <field name="full_name"/>
+                                <field name="manager_id"/>
+                                <field name="fax"/>
+                            </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+       <record model="ir.ui.view" id="archived_project_form_view">
+            <field name="name">Project</field>
+            <field name="model">cowin.project</field>
+            <field name="arch" type="xml">
+                <form string="Project Form">
+                    <sheet>
+                        <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="apply_date"/>
+                                    <field name="fund_type"/>
+                                    <field string="电话" name="phone"/>
+                                    <field name="email"/>
+                                </group>
+                                <group>
+                                    <field name="company_id"/>
+                                    <field name="state"/>
+                                    <field name="full_name"/>
+                                    <field name="manager_id"/>
+                                    <field name="fax"/>
+                                </group>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="archived_project_tree_view">
+            <field name="name">Project</field>
+            <field name="model">cowin.project</field>
+            <field name="arch" type="xml">
+                <tree string="Project Tree">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="company_id"/>
+                    <field name="full_name"/>
+                    <field name="manager_id"/>
+                    <field name="fund_type" />
+                    <field name="apply_date"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_search_view">
+            <field name="name">fund.search</field>
+            <field name="model">cowin.project</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="full_name"/>
+                    <field name="company_id"/>
+                    <field name="manager_id"/>
+                    <field name="fund_type"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="all_project_tree_view">
+            <field name="name">Project</field>
+            <field name="model">cowin.project</field>
+            <field name="arch" type="xml">
+                <tree string="Project Tree">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="company_id"/>
+                    <field name="full_name"/>
+                    <field name="manager_id"/>
+                    <field name="fund_type" />
+                    <field name="apply_date"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="all_project_list_action">
+            <field name="name">所有项目</field>
+            <field name="res_model">cowin.project</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p>Create the first fund
+                </p>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="archived_project_list_action">
+            <field name="name">归档项目</field>
+            <field name="res_model">cowin.project</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('state','=','done')]</field>
+            <field name="help" type="html">
+                <p>Create the first fund
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="main_project_root" name="项目管理"/>
+        <menuitem id="project_menu" name="项目管理"
+                  parent="main_project_root"/>
+        <menuitem id="all_project_menu" name="所有项目" parent="project_menu" sequence="1"
+                  action="all_project_list_action"/>
+        <menuitem id="archived_project_menu" name="归档项目" parent="project_menu"
+                  action="archived_project_list_action"/>
     </data>
 </odoo>

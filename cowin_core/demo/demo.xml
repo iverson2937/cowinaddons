@@ -1,5 +1,7 @@
 <odoo>
     <data>
+
+
         <!--  -->
         <!--   <record id="object0" model="cowin_core.cowin_core"> -->
         <!--     <field name="name">Object 0</field> -->

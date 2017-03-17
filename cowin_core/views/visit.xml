@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="visit_tree_view">
+            <field name="name">Visit</field>
+            <field name="model">cowin.visit</field>
+            <field name="arch" type="xml">
+                <tree string="Project Tree">
+                    <field name="company_id"/>
+                    <field name="pre_judement"/>
+                    <field name="manager_id"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="company_background"/>
+                    <field name="structure_needs"/>
+                    <field name="productsAndresearch" />
+                    <field name="manager_team"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="visit_list_action">
+            <field name="name">拜访记录</field>
+            <field name="res_model">cowin.visit</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p>Create the first visit record
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="visit_menu" name="拜访记录" parent="project_menu"
+                  action="visit_list_action"/>
+    </data>
+</odoo>

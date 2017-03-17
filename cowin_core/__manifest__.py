@@ -27,6 +27,10 @@
         # 'security/ir.model.access.csv',
         'views/fund.xml',
         'views/project.xml',
+        'views/company.xml',
+        'views/visit.xml',
+        'data/fund_sequence_data.xml',
+        'data/project_sequence_data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="all_invest_company_tree_view">
+            <field name="name">All Invest Company</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <field name="phone" position="replace">
+                    <field name="street"/>
+                    <field name="website"/>
+                    <field name="company_id"/>
+                    <field name="fax"/>
+                    <field name="phone"/>
+                    <field name="mobile"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="all_invest_company_list_action">
+            <field name="name">所有公司</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_company_type':'company'}</field>
+            <field name="help" type="html">
+                <p>Create the first invest company
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="invest_company_menu" name="投资公司" parent="main_project_root"/>
+        <menuitem id="all_invest_company_menu" name="所有公司" parent="invest_company_menu"
+                  action="all_invest_company_list_action"/>
+    </data>
+</odoo>

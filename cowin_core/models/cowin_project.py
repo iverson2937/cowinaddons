@@ -11,9 +11,14 @@ class Project(models.Model):
     _name = 'cowin.project'
     _order = 'name'
 
-    name = fields.Char(required=True, string=u"项目登记号")
+    name = fields.Char(string=u"项目编号")
     full_name = fields.Char(string=u"项目名称")
     company_id = fields.Many2one('res.partner', string=u"选择被投企业")
+
+    phone=fields.Char(related='company_id.phone',string=u"电话")
+    email=fields.Char(related='company_id.email',string=u"邮箱")
+    fax=fields.Char(related='company_id.fax',string=u"传真")
+
     capital = fields.Float(string=u'预注册资本')
     apply_date=fields.Date(string=u"申请日期")
     manager_id=fields.Many2one("res.partner",string=u"投资经理")
@@ -31,3 +36,11 @@ class Project(models.Model):
         ("draft", "Draft"),
         ("done", "Done")
     ], string=u"所处阶段")
+
+    @api.model
+    def create(self,vals):
+        if not vals.get('name'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('cowin.project') or '/'
+            print vals['name']
+        return super(Project, self).create(vals)
+

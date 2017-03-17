@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from odoo import http
+from odoo.http import request
 
-# class CowinCore(http.Controller):
-#     @http.route('/cowin_core/cowin_core/', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
 
+class CowinCore(http.Controller):
+    @http.route("/index/index", type="http", auth="public", csrf=False)
+    def index(self, **kw):
+        print kw
+
+#
 #     @http.route('/cowin_core/cowin_core/objects/', auth='public')
 #     def list(self, **kw):
 #         return http.request.render('cowin_core.listing', {
