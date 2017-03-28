@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="search_visit_tree_view">
+            <field name="name">search</field>
+            <field name="model">cowin.search</field>
+            <field name="arch" type="xml">
+                <tree string="Project Tree">
+                    <field name="company_id"/>
+                    <field name="manager_id"/>
+                    <field name="searchs_types"/>
+                    <field name="name"/>
+                    <field name="visit_date"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="search_visit_form_view">
+            <field name="name">search</field>
+            <field name="model">cowin.search</field>
+            <field name="arch" type="xml">
+                <form string="Applicant Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="project_id"/>
+                                <field name="company_id"/>
+                                <field name="contacter"/>
+                                <field name="contacter_position"/>
+                                <field name="tel"/>
+                                <field name="email"/>
+                            </group>
+                            <group>
+                                <field name="manager_id"/>
+                                <field name="searchs_types"/>
+                                <field name="name"/>
+                                <field name="visit_date"/>
+                            </group>
+                        </group>
+                        <group>
+                               <field name="relationship_with_plan_invest"/>
+                               <field name="positive_evaluation_to_plan_invest"/>
+                               <field name="negative_evaluation_to_plan_invest"/>
+                               <field name="other_issues"/>
+                               <field name="other_could_search_visit"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="search_visit_list_action">
+            <field name="name">项目尽职调查拜访记录</field>
+            <field name="res_model">cowin.search</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p>Create the first search record
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="search_visit_menu" name="项目尽职调查拜访记录" parent="project_menu"
+                  action="search_visit_list_action"/>
+    </data>
+</odoo>

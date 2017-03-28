@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="applicantProject_tree_view">
+            <field name="name">project applicant</field>
+            <field name="model">cowin.applicant</field>
+            <field name="arch" type="xml">
+                <tree string="Project Tree">
+                    <field name="code_name"/>
+                    <field name="project_id"/>
+                    <field name="industry"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="opinionProject_tree_view">
+            <field name="name">project Opinion</field>
+            <field name="model">cowin.applicant</field>
+            <field name="arch" type="xml">
+                <tree string="Project Tree">
+                    <field name="code_name"/>
+                    <field name="project_id"/>
+                    <field name="project_applicant"/>
+                    <field name="applicant_date" string="立项时间"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="applicantProject_form_view">
+            <field name="name">applicant Project</field>
+            <field name="model">cowin.applicant</field>
+            <field name="arch" type="xml">
+                <form string="Applicant Form">
+                    <sheet>
+                        <group>
+                                <group>
+                                    <field name="project_id"/>
+                                    <field name="code_name"/>
+                                    <field name="industry"/>
+                                    <field name="register_located"/>
+                                    <field name="run_located"/>
+                                </group>
+                                <group>
+                                    <field name="state"/>
+                                    <field name="project_partner" />
+                                    <field name="project_applicant"/>
+                                    <field name="applicant_date"/>
+                                    <field name="project_source"/>
+                                </group>
+                        </group>
+                        <group>
+                                <field name="company_introduction"/>
+                                <field name="project_basis"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="opinionProject_form_view">
+            <field name="name">applicant Opinion</field>
+            <field name="model">cowin.applicant</field>
+            <field name="arch" type="xml">
+                <form string="Applicant Form">
+                    <sheet>
+                        <group>
+                            <field name="project_id"/>
+                            <field name="code_name"/>
+                            <field name="project_applicant"/>
+                            <field name="applicant_date"/>
+                        </group>
+                        <group>
+                               <field name="opinion_project_partner"/>
+                               <field name="opinion_risk_control"/>
+                               <field name="opinion_manage_partner"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="applicantProject_list_action">
+            <field name="name">项目立项申请</field>
+            <field name="res_model">cowin.applicant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5,0,0),
+            (0,0,{'view_mode':'tree', 'view_id': ref('applicantProject_tree_view')}),
+            (0,0,{'view_mode':'form', 'view_id': ref('applicantProject_form_view')})]"/>
+            <field name="help" type="html">
+                <p>Create the first applicant record
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="opinionProject_list_action">
+            <field name="name">项目立项意见书</field>
+            <field name="res_model">cowin.applicant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5,0,0),
+            (0,0,{'view_mode':'tree', 'view_id': ref('opinionProject_tree_view')}),
+            (0,0,{'view_mode':'form', 'view_id': ref('opinionProject_form_view')})]"/>
+            <field name="help" type="html">
+                <p>Create the first applicant record
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="applicantProject_menu" name="项目立项申请" parent="project_menu"
+                  action="applicantProject_list_action"/>
+        <menuitem id="opinionProject_menu" name="项目立项意见书" parent="project_menu"
+                  action="opinionProject_list_action"/>
+    </data>
+</odoo>

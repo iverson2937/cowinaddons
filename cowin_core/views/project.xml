@@ -10,7 +10,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
-                                <field name="fund_type"/>
+                                <field name="code_name"/>
                                 <field name="apply_date"/>
                                 <field string="电话" name="phone"/>
                                 <field name="email"/>
@@ -18,7 +18,7 @@
                             <group>
                                 <field name="company_id"/>
                                 <field name="state"/>
-                                <field name="full_name"/>
+                                <field name="fund_type"/>
                                 <field name="manager_id"/>
                                 <field name="fax"/>
                             </group>
@@ -38,7 +38,7 @@
                         <group>
                                 <group>
                                     <field name="name"/>
-                                    <field name="apply_date"/>
+                                    <field name="code_name"/>
                                     <field name="fund_type"/>
                                     <field string="电话" name="phone"/>
                                     <field name="email"/>
@@ -46,7 +46,7 @@
                                 <group>
                                     <field name="company_id"/>
                                     <field name="state"/>
-                                    <field name="full_name"/>
+                                    <field name="apply_date"/>
                                     <field name="manager_id"/>
                                     <field name="fax"/>
                                 </group>
@@ -63,9 +63,9 @@
             <field name="arch" type="xml">
                 <tree string="Project Tree">
                     <field name="name"/>
+                    <field name="code_name"/>
                     <field name="state"/>
                     <field name="company_id"/>
-                    <field name="full_name"/>
                     <field name="manager_id"/>
                     <field name="fund_type" />
                     <field name="apply_date"/>
@@ -79,8 +79,8 @@
             <field name="arch" type="xml">
                 <search>
                     <field name="name"/>
+                    <field name="code_name"/>
                     <field name="state"/>
-                    <field name="full_name"/>
                     <field name="company_id"/>
                     <field name="manager_id"/>
                     <field name="fund_type"/>
@@ -94,9 +94,9 @@
             <field name="arch" type="xml">
                 <tree string="Project Tree">
                     <field name="name"/>
+                    <field name="code_name"/>
                     <field name="state"/>
                     <field name="company_id"/>
-                    <field name="full_name"/>
                     <field name="manager_id"/>
                     <field name="fund_type" />
                     <field name="apply_date"/>
@@ -110,6 +110,9 @@
             <field name="res_model">cowin.project</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
+            <field name="view_ids" eval="[(5,0,0),
+            (0,0,{'view_mode':'tree', 'view_id': ref('all_project_tree_view')}),
+            (0,0,{'view_mode':'form', 'view_id': ref('all_project_form_view')})]"/>
             <field name="help" type="html">
                 <p>Create the first fund
                 </p>
@@ -121,6 +124,9 @@
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain">[('state','=','done')]</field>
+            <field name="view_ids" eval="[(5,0,0),
+            (0,0,{'view_mode':'tree', 'view_id': ref('archived_project_tree_view')}),
+            (0,0,{'view_mode':'form', 'view_id': ref('archived_project_form_view')})]"/>
             <field name="help" type="html">
                 <p>Create the first fund
                 </p>

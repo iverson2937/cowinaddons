@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="invest_decision_tree_view">
+            <field name="name">invest decision</field>
+            <field name="model">cowin.invest_applicant</field>
+            <field name="arch" type="xml">
+                <tree string="Project Tree">
+                    <field name="company_id"/>
+                    <field name="manager_id"/>
+                    <field name="name"/>
+                    <field name="reviewer"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="invest_decision_form_view">
+            <field name="name">invest decision</field>
+            <field name="model">cowin.invest_applicant</field>
+            <field name="arch" type="xml">
+                <form string="Applicant Form">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="project_id"/>
+                                <field name="company_id"/>
+                                <field name="manager_id"/>
+                                <field name="name"/>
+                                <field name="search_check_date"/>
+                            </group>
+                            <group>
+                                <field name="reviewer"/>
+                                <field name="risk_control_director"/>
+                                <field name="submit_data_manifest"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="项目合伙人预审意见">
+                               <field name="partner_pre_check_opinion"/>
+                            </page>
+                            <page string="风险揭示">
+                               <field name="risk_reveal"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="invest_decision_list_action">
+            <field name="name">项目投资决策申请表</field>
+            <field name="res_model">cowin.invest_applicant</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p>Create the first invest decision record
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="invest_decision_menu" name="项目投资决策申请表" parent="project_menu"
+                  action="invest_decision_list_action"/>
+    </data>
+</odoo>
